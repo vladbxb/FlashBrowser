@@ -7,7 +7,9 @@ run npm start and the browser should open.
 <br/>![Capture](https://user-images.githubusercontent.com/17104414/124369458-a71aed00-dc31-11eb-9347-e5e126e09e4c.PNG)
 <br/>![Captures](https://user-images.githubusercontent.com/17104414/124369943-2d85fd80-dc37-11eb-89c7-ea4d5041049b.PNG)
 
-
+# Notes
+For running on Apple Silicon, npm install should be run for Darwin x86 (running with Rosetta 2), like so:
+```npm install --arch=x64 --platform=darwin```
 
 # Future Plans?
 I plan to implement the capability of importing .swf files to run them as well as packaging the files so that they may be run more easily on all devices.
