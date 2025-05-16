@@ -1,25 +1,26 @@
 {
-  "name": "flash-browser2",
-  "version": "0.0.1",
+  "name": "flash-browser",
+  "version": "0.0.2",
   "description": "A small browser capable of viewing/displaying pages with embedded flash content.",
   "main": "main.js",
   "author": {
-    "name": "tootyta12"
-  },
-  "directories": {
-    "flashver": "flashver"
+    "name": "vladbxb"
   },
   "scripts": {
-    "start": "electron .",
-    "build": "electron-packager . FlashBrowser2 --platform=all",
-    "pack": "build --dir",
-    "dist": "electron-builder"
+	"start": "electron .",
+	"dist": "electron-packager . FlashBrowser --platform=all --arch=x64 --overwrite --out=release --ignore='^/dist$' --ignore='^/release$'"
   },
+  "files": [
+	  "**/*",
+	  "!release",
+	  "!dist"
+  ],
   "devDependencies": {
     "electron": "^11.4.9",
     "electron-builder": "^22.11.7",
-    "electron-packager": "^15.2.0",
-    "electron-prompt": "^1.6.2"
+    "electron-packager": "^15.2.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "electron-prompt": "^1.6.2"
+  }
 }
