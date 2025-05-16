@@ -2,11 +2,13 @@
 const electron = require('electron');
 const path = require('path');
 
-const { app, BrowserWindow, Menu} = electron; //Menu generated for the purposes of visiting new URLs.
-const prompt = require('electron-prompt'); //prompting system to get user URL
+// Menu generated for the purposes of visiting new URLs.
+const { app, BrowserWindow, Menu} = electron;
+// Prompting system to get user URL
+const prompt = require('electron-prompt'); 
 
-
-let pluginName = null; //put the right flash plugin in depending on the operating system.
+// Load the right flash plugin depending on the operating system.
+let pluginName;
 switch (process.platform) {
 	case 'win32':
 		switch (process.arch) {
@@ -25,7 +27,7 @@ switch (process.platform) {
 		switch (process.arch) {
 			case 'ia32':
 			case 'x32':
-				pluginName = 'flashver/libpepflashplayer.so' // added and tested :D
+				pluginName = 'flashver/libpepflashplayer.so'
 				break
 			case 'x64':
 				pluginName = 'flashver/libpepflashplayer.so'
@@ -39,12 +41,12 @@ switch (process.platform) {
 		break
 }
 app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName));
-//CACHE IS ENABLED but restarted on launch!
-//TODO: Support importing custom .swf files to play
 
-let mainWindow;
+// CACHE IS ENABLED but restarted on launch!
+// TODO: Support importing custom .swf files to play
 
-function promptIt(isSplash, win) { //function to handle prompting
+function promptIt(isSplash, win) { 
+	// Handle prompting.
 	prompt({
 		title: "Flash Browser",
 		label: "URL: ",
@@ -68,7 +70,8 @@ function promptIt(isSplash, win) { //function to handle prompting
 					win.loadURL(r);
 					win.maximize();
 					setTimeout(() => {
-						win.show(); //pauses program for 1 second to allow web-page to load before rendering.
+						// Pauses program for 1 second to allow web-page to load before rendering.
+						win.show(); 
 					}, 1000);
                 }
 
@@ -107,11 +110,12 @@ app.on('ready', function () {
 	})
 	promptIt(false, win);
 	win.webContents.session.clearCache(function () {
-		//clearCache
+		// TODO: clearCache
 	});
 	
 })
 
+// Handle quitting
 app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') app.quit(); //fricking darwin!! >:D
+	if (process.platform !== 'darwin') app.quit();
 })
